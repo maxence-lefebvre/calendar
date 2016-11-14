@@ -19,8 +19,8 @@ class CookieParser {
     static parseCookies(cookies) {
         var oCookies = {};
         cookies.split(';').forEach((cookie) => {
-            cookie                  = cookie.split('=');
-            oCookies[cookie[0]] = cookie[1];
+            const parts = /([^=]*)=(.*)/ig.exec(cookie);
+            oCookies[parts[1]] = parts[2];
         });
         return oCookies;
     }
