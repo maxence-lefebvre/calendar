@@ -22,10 +22,10 @@ function handleReceiveToken(req, res) {
             if (!email) {
                 return res.status(404).json(`email not found`);
             }
-            res.cookie('node-tutorial-token', token.access_token, {maxAge: 4000, httpOnly: true});
-            res.cookie('node-tutorial-refresh-token', token.refresh_token, {maxAge: 4000, httpOnly: true});
-            res.cookie('node-tutorial-token-expires', token.expires_at.getTime(), {maxAge: 4000, httpOnly: true});
-            res.cookie('node-tutorial-email', email, {maxAge: 4000, httpOnly: true});
+            res.cookie('node-tutorial-token', token.access_token, {/*maxAge: 4000,*/ httpOnly: true});
+            res.cookie('node-tutorial-refresh-token', token.refresh_token, {/*maxAge: 4000,*/ httpOnly: true});
+            res.cookie('node-tutorial-token-expires', token.expires_at.getTime(), {/*maxAge: 4000,*/ httpOnly: true});
+            res.cookie('node-tutorial-email', email, {/*maxAge: 4000,*/ httpOnly: true});
             return res.redirect('/calendarEvent');
         }
     );
