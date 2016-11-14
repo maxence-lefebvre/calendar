@@ -48,7 +48,6 @@ function createCalendarEvent(req, res) {
                                 'TimeZone': 'Central European Standard Time'
                             },
                         };
-                        console.log(newEvent);
                         events.push(newEvent);
                     }
                 });
@@ -66,7 +65,7 @@ function createCalendarEvent(req, res) {
             outlook.calendar.createEvent({token: token, event: event},
                 function (error) {
                     if (error) {
-                        console.log('createEvent returned an error: ' + error);
+                        console.error('createEvent returned an error: ', error);
                     }
                     done();
                 }
