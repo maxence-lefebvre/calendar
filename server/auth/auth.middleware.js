@@ -2,7 +2,11 @@
 
 const OutlookService = require('./../services/OutlookService');
 
+/////   exports    /////
+
 module.exports.isAuthenticated = isAuthenticated;
+
+/////   definitions    /////
 
 function isAuthenticated (req, res, next) {
     var code = req.query.code;

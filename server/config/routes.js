@@ -6,6 +6,8 @@ const express = require('express');
 const config         = require('./environment');
 const OutlookService = require('./../services/OutlookService');
 
+/////   exports    /////
+
 module.exports = function (app) {
 
     app.use('/authorize', require('./../auth/index'));

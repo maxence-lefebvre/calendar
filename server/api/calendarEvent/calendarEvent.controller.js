@@ -3,13 +3,17 @@
 const config = require('./../../config/environment');
 
 const csv     = require('csv-parser');
-const moment  = require('moment');
 const outlook = require('node-outlook');
 
-var OutlookService = require('./../../services/OutlookService');
+const OutlookService      = require('./../../services/OutlookService');
+const CalendarEventParser = require('./../../components/calendarEvent/CalendarEventParser');
+
+/////   exports    /////
 
 module.exports.renderIndex         = renderIndex;
 module.exports.createCalendarEvent = createCalendarEvent;
+
+/////   definitions    /////
 
 function renderIndex(req, res) {
     res.render(config.views.index);
@@ -31,25 +35,8 @@ function createCalendarEvent(req, res) {
         (fieldname, file) => {
             file.pipe(csv(config.csv.events.config))
                 .on('data', function (data) {
-                    if (data.Annee !== 'Date') {
-                        const date   = data.Créneau.split(" - ");
-                        var newEvent = {
-                            'Subject': data.Activité,
-                            'Body': {
-                                'ContentType': 'HTML',
-                                'Content': `<p>${data.Description}</p><br/><br/><p>${data.salle}</p><br/><br/>${data.Réservations}`,
-                            },
-                            'Start': {
-                                'DateTime': moment(data.Annee + " " + date[0]).format(),
-                                'TimeZone': 'Central European Standard Time'
-                            },
-                            'End': {
-                                'DateTime': moment(data.Annee + " " + date[1]).format(),
-                                'TimeZone': 'Central European Standard Time'
-                            },
-                        };
-                        events.push(newEvent);
-                    }
+                    const event = CalendarEventParser.fromCSV(data);
+                    event && events.push(event);
                 });
         }
     );

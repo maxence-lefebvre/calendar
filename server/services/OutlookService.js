@@ -6,11 +6,15 @@ const config        = require('./../config/environment');
 const outlookConfig = config.outlook;
 const oauth2        = require('simple-oauth2')(outlookConfig.credentials);
 
+/////   exports    /////
+
 exports.getAuthUrl         = getAuthUrl;
 exports.getTokenFromCode   = getTokenFromCode;
 exports.refreshAccessToken = refreshAccessToken;
 exports.getUserEmail       = getUserEmail;
 exports.setApiEndpoint     = setApiEndpoint;
+
+////////////////////////////////
 
 function setApiEndpoint() {
     outlook.base.setApiEndpoint(config.outlook.api.endpoint);

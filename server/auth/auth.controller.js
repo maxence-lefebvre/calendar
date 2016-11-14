@@ -1,9 +1,13 @@
 'use strict';
 
 //const config = require('./../config/environment');
-var OutlookService = require('./../services/OutlookService');
+const OutlookService = require('./../services/OutlookService');
+
+/////   exports    /////
 
 module.exports.handleReceiveToken = handleReceiveToken;
+
+/////   definitions    /////
 
 function handleReceiveToken(req, res) {
     const token = req.token.token;

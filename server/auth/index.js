@@ -1,13 +1,14 @@
 'use strict';
 
-var express = require('express');
+const express = require('express');
 
-var AuthController = require('./auth.controller');
-var AuthMiddleware = require('./auth.middleware');
+const AuthController = require('./auth.controller');
+const AuthMiddleware = require('./auth.middleware');
 
-var router = express.Router();
+const router = express.Router();
 
 router.get('/', AuthMiddleware.isAuthenticated, AuthController.handleReceiveToken);
 
-module.exports = router;
+/////   exports    /////
 
+module.exports = router;
