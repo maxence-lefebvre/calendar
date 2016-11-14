@@ -7,7 +7,7 @@
     "start": "cross-env NODE_ENV=production forever start --uid=\"outlook\" -a server/app.js",
     "dev": "cross-env NODE_ENV=development node server/app.js",
     "install:dev": "npm install && bower install",
-    "install:prod": "npm install --production"
+    "install:prod": "npm install --production && bower install"
   },
   "keywords": [
     "outlook",
