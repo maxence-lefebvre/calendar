@@ -1,0 +1,25 @@
+{
+  "name": "node-tutorial",
+  "description": "A simple Node.js tutorial to use the Mail API",
+  "main": "index.js",
+  "authors": [
+    "Maxence LEFEBVRE <maxence.lefebvre@soprasteria.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "outlook",
+    "microsoft"
+  ],
+  "homepage": "https://github.com/mlefebvresopra/calendar",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./public/assets/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}
