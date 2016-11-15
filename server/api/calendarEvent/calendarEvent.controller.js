@@ -7,6 +7,7 @@ const outlook = require('node-outlook');
 
 const OutlookService      = require('./../../services/OutlookService');
 const CalendarEventParser = require('./../../components/calendarEvent/CalendarEventParser');
+const RequestPool         = require('./../../components/requests/RequestPool');
 
 /////   exports    /////
 
@@ -42,22 +43,30 @@ function createCalendarEvent(req, res) {
     );
 
     req.busboy.on('finish', () => {
-        let pendingRequests = events.length + 1;
-        const done          = function () {
-            return --pendingRequests === 0 && res.status(200).json();
-        };
-        done();
+        // set api endpoint
         OutlookService.setApiEndpoint();
-        events.forEach((event) => {
-            outlook.calendar.createEvent({token: token, event: event},
-                function (error) {
-                    if (error) {
-                        console.error('createEvent returned an error: ', error);
-                    }
-                    done();
-                }
-            );
-        });
+        // Use a request pool
+        RequestPool.run(
+            // items to iterate on
+            events,
+            // callback to call on each item
+            (event, done) => {
+                outlook.calendar.createEvent({token: token, event: event},
+                    function (error) {
+                        if (error) {
+                            console.error('createEvent returned an error: ', error);
+                        }
+                        done();
+                    });
+            },
+            // callback when all requests are completed
+            () => {
+                // end current request
+                res.status(200).json()
+            },
+            // max number of parallel requests
+            config.outlook.api.maxNumberOfParallelRequests
+        );
     });
 
     req.pipe(req.busboy);

@@ -16,7 +16,8 @@ const all = {
 
     outlook: {
         api: {
-            endpoint: 'https://outlook.office.com/api/v2.0'
+            endpoint: 'https://outlook.office.com/api/v2.0',
+            maxNumberOfParallelRequests: 5
         },
         credentials: {
             site: 'https://login.microsoftonline.com/common',
