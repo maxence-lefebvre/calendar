@@ -7,7 +7,9 @@
     "start": "cross-env NODE_ENV=production forever start --uid=\"outlook\" -a server/app.js",
     "dev": "cross-env NODE_ENV=development node server/app.js",
     "install:dev": "npm install && bower install",
-    "install:prod": "npm install --production && bower install"
+    "install:prod": "npm install --production && bower install",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "keywords": [
     "outlook",
@@ -28,9 +30,11 @@
     "multiparty": "^4.1.2",
     "node-outlook": "^1.1.6",
     "simple-oauth2": "^0.7.0",
-    "util": "^0.10.3"
+    "util": "^0.10.3",
+    "snyk": "^1.189.0"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {}
+  "devDependencies": {},
+  "snyk": true
 }
