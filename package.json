@@ -22,7 +22,7 @@
     "csv-parser": "^1.11.0",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
-    "forever": "^0.15.3",
+    "forever": "^3.0.4",
     "lodash": "^4.17.0",
     "moment": "^2.16.0",
     "multiparty": "^4.1.2",
